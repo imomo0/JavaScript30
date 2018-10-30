@@ -10,14 +10,29 @@ body,html {
   font-family: sans-serif;
 }
 
-.keys {
+.all {
+  display: block;
+  margin-top: 50%;
+  margin: auto;
+  width: 1000px;
+  height: 500px;
+}
+
+.keys_oppe {
   display: flex;
   flex: 1;
-  min-height: 100vh;
+  min-height: 1.3rem;
   align-items: center;
   justify-content: center;
 }
 
+.keys_nede {
+  display: flex;
+  flex: 1;
+  min-height: 1.3rem;
+  align-items: center;
+  justify-content: center;
+}
 .key {
   border: .4rem solid black;
   border-radius: .5rem;
@@ -33,7 +48,7 @@ body,html {
 }
 
 .playing {
-  transform: scale(2.1);
+  transform: scale(1.1);
   border-color: #ffc600;
   box-shadow: 0 0 1rem #ffc600;
 }
