@@ -75,8 +75,29 @@
       this.classList.remove('playing');
     }
 
+    function mouseOver() {
+      this.classList.add('over');
+    }
+    function mouseLeave() {
+      this.classList.remove('over');
+    }
+
+    function mouseDown() {
+      // const audio = document.querySelector(`audio[${this.propertyName}]`)
+      // const ele = document.getElementsByName(this.'data-key'));
+      // console.log(ele);
+      // console.log(this.getAttribute("data-key"));
+      const audio = document.querySelector(`audio[data-key="${this.getAttribute("data-key")}"]`);
+      audio.currentTime = 0; // spoler tilbake wav klippet til start slik at man kan spamme knappen
+      audio.play();
+      this.classList.add('playing');
+    }
+
     const keys = document.querySelectorAll('.key');
     keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    keys.forEach(key => key.addEventListener('mouseover', mouseOver));
+    keys.forEach(key => key.addEventListener('mouseleave', mouseLeave));
+    keys.forEach(key => key.addEventListener('mousedown', mouseDown));
 
     window.addEventListener('keydown', playSound);
   </script>
