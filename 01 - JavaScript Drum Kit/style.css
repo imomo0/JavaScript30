@@ -12,7 +12,7 @@ body,html {
 
 .content {
   width: 1000px;
-  height: 300px;
+  height: 250px;
 
   position:absolute; 
   left:0; right:0;
@@ -27,7 +27,6 @@ body,html {
 
 .keys_oppe {
   display: flex;
-  margin-top: 40px;
   flex: 1;
   min-height: 1.3rem;
   align-items: center;
@@ -55,19 +54,11 @@ body,html {
   text-shadow: 0 0 .5rem black;
 }
 
-.over {
-  transform: scale(1.2);
-  border-color: #997d16;
-  box-shadow: 0 0 1rem #997d16;
-}
-
 .playing {
-  transform: scale(1.4);
+  transform: scale(1.1);
   border-color: #ffc600;
   box-shadow: 0 0 1rem #ffc600;
 }
-
-
 
 kbd {
   display: block;

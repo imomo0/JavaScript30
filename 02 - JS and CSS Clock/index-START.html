@@ -57,6 +57,17 @@
       /* account for the height of the clock hands */
     }
 
+    .dot {
+      background: black;
+      position: absolute;
+      transform-origin: 50%;
+      width: 5px;
+      height: 5px;
+      top: 50%;
+      left: 50%;
+      /* account for the height of the clock hands */
+    }
+
     .hand {
       width: 50%;
       height: 6px;
@@ -68,9 +79,19 @@
       transition: all .05s;
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
+
+    .hour-hand {
+      width: 35%;
+      left: 15%;
+    }
+
+    .second-hand {
+      height: 3px;
+    }
   </style>
 
   <script>
+    window.onload = createDot();
     const secondHand = document.querySelector('.second-hand');
     const minuteHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
@@ -84,13 +105,24 @@
       secondHand.style.transform = `rotate(${secDeg}deg)`;
       
       const minute = now.getMinutes();
-      const minDeg = ((minute / 60) * 360)+90;
+      const minDeg = (((minute / 60) * 360)+90)+((second/60*6));
       minuteHand.style.transform = `rotate(${minDeg}deg)`;
 
       const hour = now.getHours();      
       const hourDeg = (((hour / 12) * 360)+90)+((minute/60*30));
       hourHand.style.transform = `rotate(${hourDeg}deg)`;
-      console.log(hour+":"+minute+":"+second);
+    }
+
+    function createDot() {
+      for(var i = 0; i<= 360; i+=30)
+      {
+        var varX = 150 * Math.cos(i*Math.PI/180);
+        var varY = 150 * Math.sin(i*Math.PI/180);
+        var newDot = `<div class=\"dot\" style=\"transform: translate(${varX}px, ${varY}px) rotate(${i}deg)\"></div>`;
+        
+        const div = document.querySelector('.clock-face');
+        div.innerHTML += newDot;
+      }
     }
 
     setInterval(setDate, 1000);
