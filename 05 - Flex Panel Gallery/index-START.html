@@ -38,8 +38,8 @@
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
-        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
-        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        font-size 0.7s cubic-bezier(0.71,-0.16, 0.39, 1.23),
+        flex 0.8s cubic-bezier(0.71,-0.16, 0.39, 1.23),
         background 0.2s;
       font-size: 20px;
       background-size: cover;
@@ -124,9 +124,15 @@
   <script>
     const panels = document.querySelectorAll(`.panel`);
     panels.forEach(panel => panel.addEventListener('click', panelClick));
+    panels.forEach(panel => panel.addEventListener('transitionend', bringText));
 
     function panelClick() {
-      this.classList.add()
+      this.classList.toggle(`open`);
+    }
+
+    function bringText(e) {
+      if(e.propertyName.includes('flex')) this.classList.toggle(`open-active`);
+      // this.classList.toggle(`-active`);
     }
 
   </script>
