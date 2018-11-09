@@ -130,7 +130,14 @@
     panels.forEach(panel => panel.addEventListener('click', panelClick));
     panels.forEach(panel => panel.addEventListener('transitionend', bringText));
     panels.forEach(panel => panel.addEventListener('mouseover', (e) => {
-      e.target.classList.add(`hover`);
+      if(e.target.classList.contains(`open-active`) || e.target.classList.contains(`open`)) return;
+      if(e.target.tagName == 'DIV') {
+        e.target.classList.add(`hover`);
+      }
+      else { 
+      if(e.target.parentElement.classList.contains(`open-active`) || e.target.parentElement.classList.contains(`open`)) return; // Hvis elementet er klikket ikke legg på hoover stylen.
+      e.target.parentElement.classList.add(`hover`) // For å få DIVen som p ligger i.
+      }
     }));
     panels.forEach(panel => panel.addEventListener('mouseleave', (e) => {
        e.target.classList.remove(`hover`);
