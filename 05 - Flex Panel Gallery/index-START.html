@@ -90,6 +90,10 @@
       font-size: 40px;
     }
 
+    .panel.hover {
+      flex: 1.5;
+    }
+
   </style>
 
 
@@ -125,14 +129,24 @@
     const panels = document.querySelectorAll(`.panel`);
     panels.forEach(panel => panel.addEventListener('click', panelClick));
     panels.forEach(panel => panel.addEventListener('transitionend', bringText));
+    panels.forEach(panel => panel.addEventListener('mouseover', (e) => {
+      e.target.classList.add(`hover`);
+    }));
+    panels.forEach(panel => panel.addEventListener('mouseleave', (e) => {
+       e.target.classList.remove(`hover`);
+    }));
 
-    function panelClick() {
-      this.classList.toggle(`open`);
+    function panelClick(e) {
+      this.classList.remove(`hover`);
+      panels.forEach(panel => panel.classList.remove(`open`));
+      this.classList.add(`open`);
     }
 
     function bringText(e) {
-      if(e.propertyName.includes('flex')) this.classList.toggle(`open-active`);
-      // this.classList.toggle(`-active`);
+      if(e.propertyName.includes('flex') && e.target.classList.contains(`open`)) {
+        panels.forEach(panel => panel.classList.remove(`open-active`));
+        this.classList.toggle(`open-active`);
+      }
     }
 
   </script>
