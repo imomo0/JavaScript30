@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Flex Panels 💪</title>
   <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
   <style>
     html {
@@ -14,12 +16,14 @@
       font-size: 20px;
       font-weight: 200;
     }
-    
+
     body {
       margin: 0;
     }
-    
-    *, *:before, *:after {
+
+    *,
+    *:before,
+    *:after {
       box-sizing: inherit;
     }
 
@@ -31,15 +35,15 @@
 
     .panel {
       background: #6B0F9C;
-      box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+      box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
       color: white;
       text-align: center;
       align-items: center;
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
-        font-size 0.7s cubic-bezier(0.71,-0.16, 0.39, 1.23),
-        flex 0.8s cubic-bezier(0.71,-0.16, 0.39, 1.23),
+        font-size 0.7s cubic-bezier(0.71, -0.16, 0.39, 1.23),
+        flex 0.8s cubic-bezier(0.71, -0.16, 0.39, 1.23),
         background 0.2s;
       font-size: 20px;
       background-size: cover;
@@ -51,14 +55,28 @@
       flex-direction: column;
     }
 
-    .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
-    .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
-    .panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
-    .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
-    .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
+    .panel1 {
+      background-image: url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500);
+    }
+
+    .panel2 {
+      background-image: url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500);
+    }
+
+    .panel3 {
+      background-image: url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d);
+    }
+
+    .panel4 {
+      background-image: url(https://source.unsplash.com/ITjiVXcwVng/1500x1500);
+    }
+
+    .panel5 {
+      background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500);
+    }
 
     /* Flex Children */
-    .panel > * {
+    .panel>* {
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
@@ -69,10 +87,21 @@
       align-items: center;
     }
 
-    .panel > *:first-child { transform: translateY(-100%);}
-    .panel.open-active > *:first-child { transform: translateY(0);}
-    .panel > *:last-child { transform: translateY(100%);}
-    .panel.open-active > *:last-child { transform: translateY(0);}
+    .panel>*:first-child {
+      transform: translateY(-100%);
+    }
+
+    .panel.open-active>*:first-child {
+      transform: translateY(0);
+    }
+
+    .panel>*:last-child {
+      transform: translateY(100%);
+    }
+
+    .panel.open-active>*:last-child {
+      transform: translateY(0);
+    }
 
     .panel p {
       text-transform: uppercase;
@@ -80,7 +109,7 @@
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
     }
-    
+
     .panel p:nth-child(2) {
       font-size: 4em;
     }
@@ -93,7 +122,6 @@
     .panel.hover {
       flex: 1.5;
     }
-
   </style>
 
 
@@ -126,31 +154,42 @@
   </div>
 
   <script>
+    let panelOpen = false;
     const panels = document.querySelectorAll(`.panel`);
     panels.forEach(panel => panel.addEventListener('click', panelClick));
     panels.forEach(panel => panel.addEventListener('transitionend', bringText));
     panels.forEach(panel => panel.addEventListener('mouseover', (e) => {
-      if(e.target.classList.contains(`open-active`) || e.target.classList.contains(`open`)) return;
-      if(e.target.tagName == 'DIV') {
-        e.target.classList.add(`hover`);
-      }
-      else { 
-      if(e.target.parentElement.classList.contains(`open-active`) || e.target.parentElement.classList.contains(`open`)) return; // Hvis elementet er klikket ikke legg på hoover stylen.
-      e.target.parentElement.classList.add(`hover`) // For å få DIVen som p ligger i.
+      if (!panelOpen) {
+        if (e.target.classList.contains(`open-active`) || e.target.classList.contains(`open`)) return;
+        if (e.target.tagName == 'DIV') {
+          e.target.classList.add(`hover`);
+        }
+        else {
+          if (e.target.parentElement.classList.contains(`open-active`) || e.target.parentElement.classList.contains(`open`)) return; // Hvis elementet er klikket ikke legg på hoover stylen.
+          e.target.parentElement.classList.add(`hover`) // For å få DIVen som p ligger i.
+        }
       }
     }));
     panels.forEach(panel => panel.addEventListener('mouseleave', (e) => {
-       e.target.classList.remove(`hover`);
+      e.target.classList.remove(`hover`);
     }));
 
     function panelClick(e) {
       this.classList.remove(`hover`);
-      panels.forEach(panel => panel.classList.remove(`open`));
-      this.classList.add(`open`);
+      if(this.classList.contains(`open`)) {
+        panelOpen = false;
+        this.classList.remove(`open`);
+        this.classList.remove(`open-active`);
+      }
+      else {
+        panels.forEach(panel => panel.classList.remove(`open`));
+        this.classList.add(`open`);
+        panelOpen = true;
+      }
     }
 
     function bringText(e) {
-      if(e.propertyName.includes('flex') && e.target.classList.contains(`open`)) {
+      if (e.propertyName.includes('flex') && e.target.classList.contains(`open`)) {
         panels.forEach(panel => panel.classList.remove(`open-active`));
         this.classList.toggle(`open-active`);
       }
@@ -161,4 +200,5 @@
 
 
 </body>
+
 </html>
