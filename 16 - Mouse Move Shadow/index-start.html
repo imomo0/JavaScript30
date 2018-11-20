@@ -47,6 +47,8 @@
       // const height = hero.offsetHeight;
       const { offsetHeight: height, offsetWidth: width } = hero;
       let { offsetX: x, offsetY: y } = e;
+      
+      // Funksjon for å få riktig x og y verdi når man er over h elementet i Diven
       if (this !== e.target) {
         x = x + e.target.offsetLeft;
         y = y + e.target.offsetTop;
